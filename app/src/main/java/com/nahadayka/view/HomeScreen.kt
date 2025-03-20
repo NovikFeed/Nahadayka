@@ -1,8 +1,12 @@
 package com.nahadayka.view
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
@@ -22,11 +26,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.nahadayka.viewModel.NavigationViewModel
 
 sealed class ScreenItemOnBottomBar(val route: String, val title: String, val icon: ImageVector) {
     object Reminders : ScreenItemOnBottomBar("reminders", "Нагадування", Icons.Default.Notifications)
@@ -38,6 +44,7 @@ sealed class ScreenItemOnBottomBar(val route: String, val title: String, val ico
 @Composable
 fun HomeScreen() {
     val navController = rememberNavController()
+    val viewModel = hiltViewModel<NavigationViewModel>()
     val items = listOf(
         ScreenItemOnBottomBar.Reminders,
         ScreenItemOnBottomBar.Calendar,
@@ -95,7 +102,9 @@ fun HomeScreen() {
                 composable(ScreenItemOnBottomBar.Calendar.route) {
                 }
                 composable(ScreenItemOnBottomBar.Settings.route) {
+                   SettingsScreen(viewModel)
                 }
+
             }
         }
     }

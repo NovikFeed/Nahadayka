@@ -106,6 +106,9 @@ class NavigationViewModel @Inject constructor(
                         NavigationState(isLoading = true, message = "Access token expired")
                     val response = repository.refreshTokens(refresh)
                     if (response.isSuccess) {
+                        sharedPreferences.saveString(response.responseBody?.access, "access")
+                        sharedPreferences.saveString(response.responseBody?.refresh, "refresh")
+                        sharedPreferences.saveString((System.currentTimeMillis()+60*60*1000).toString(), "expiration")
                         _navigationState.value = NavigationState(
                             isLoading = false,
                             message = "ok",
