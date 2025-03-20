@@ -28,6 +28,9 @@ android {
             )
         }
     }
+    composeOptions{
+        kotlinCompilerExtensionVersion = "1.5.7"
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
