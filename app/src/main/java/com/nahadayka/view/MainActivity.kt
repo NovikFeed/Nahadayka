@@ -41,7 +41,7 @@ fun MainContent() {
     }
     NavHost(modifier = Modifier.fillMaxSize(), startDestination = Screen.Login.route, navController = navController){
         composable(Screen.Login.route) {
-            LoginScreen()
+            LoginScreen(navigationState)
         }
         composable(Screen.Home.route) {
             HomeScreen()
