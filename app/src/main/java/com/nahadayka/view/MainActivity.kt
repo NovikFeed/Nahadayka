@@ -44,9 +44,11 @@ fun MainContent() {
     val navigationViewModel = hiltViewModel<NavigationViewModel>()
     val navController = rememberNavController()
     val navigationState = navigationViewModel.navigationState.collectAsState().value
+    val currentScreen = navController.currentBackStackEntry?.destination?.route
     LaunchedEffect(navigationState) {
+        if(navigationState.screenRoute != currentScreen){
         navController.popBackStack()
-        navController.navigate(navigationState.screenRoute)
+        navController.navigate(navigationState.screenRoute)}
     }
     Box(modifier = Modifier.fillMaxSize()) {
         NavHost(
