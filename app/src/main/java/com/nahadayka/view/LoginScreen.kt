@@ -28,16 +28,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.nahadayka.R
 import com.nahadayka.viewModel.NavigationState
+import com.nahadayka.viewModel.NavigationViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(state: NavigationState) {
+fun LoginScreen(state: NavigationState, authViewModel : NavigationViewModel) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        var isLogin by remember { mutableStateOf(true) }
+        var isLogin by remember { mutableStateOf(state.isLogin) }
         var emailValue by remember { mutableStateOf("") }
         var passwordValue by remember { mutableStateOf("") }
         var emailEmptyError by remember { mutableStateOf(false) }
@@ -179,11 +180,11 @@ fun LoginScreen(state: NavigationState) {
                 }
                 if (isLogin) {
                     if (!emailEmptyError && !emailValidError && !passwordEmptyError && !passwordValidError) {
-//                        authViewModel.startAuth(emailValue, passwordValue, isLogin = isLogin)
+                        authViewModel.startAuth(emailValue, passwordValue, isLogin = isLogin)
                     }
                 } else {
                     if (!emailEmptyError && !emailValidError && !passwordEmptyError && !passwordValidError && !confirmPasswordValidError && !confirmPasswordEmptyError && !confirmDoublePasswordError) {
-//                        authViewModel.startAuth(emailValue, passwordValue, confirmPasswordValue, isLogin = isLogin)
+                        authViewModel.startAuth(emailValue, passwordValue, confirmPasswordValue, isLogin = isLogin)
                     }
                 }
             },

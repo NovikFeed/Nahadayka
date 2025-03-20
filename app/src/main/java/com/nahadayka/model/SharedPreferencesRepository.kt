@@ -19,7 +19,7 @@ class SharedPreferencesRepository @Inject constructor(
         return ""
     }
 
-    fun saveString(value : String, key : String){
+    fun saveString(value : String?, key : String){
         sharedPreferences.edit() { putString(key, value) }
     }
 
