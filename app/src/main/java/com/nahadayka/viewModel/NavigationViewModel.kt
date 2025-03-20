@@ -85,7 +85,7 @@ class NavigationViewModel @Inject constructor(
         val refresh = sharedPreferences.getString("refresh")
         val expirationTime = sharedPreferences.getString("expiration")
         if (expirationTime != "") {
-            if (expirationTime.toLong() < System.currentTimeMillis()) {
+            if (expirationTime.toLong() > System.currentTimeMillis()) {
                 if(access != "" && refresh != ""){
                     _navigationState.value = NavigationState(
                         isLoading = false,
