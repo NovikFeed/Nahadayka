@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name" translatable="false">Nahadayka</string>
-    <string name="hello">Hello</string>
+    <string name="title_login">Login</string>
+    <string name="title_register">Register</string>
+    <string name="title_email">Email</string>
+    <string name="title_password">Password</string>
+    <string name="title_confirm_password">Confirm password</string>
+    <string name="error_message_email_empty">The email field must not be empty.</string>
+    <string name="error_message_email_valid">The email must contain @....</string>
+    <string name="error_message_password_empty">The password field must not be empty.</string>
+    <string name="error_message_password_valid">Password must be at least 8 characters long</string>
+    <string name="error_message_password_match">Passwords must match</string>
+    <string name="title_navigate_to_register">Click here to register</string>
+    <string name="title_navigate_to_login">Return to login</string>
+
+
+
+
 </resources>

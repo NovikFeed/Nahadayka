@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Привіт</string>
+    <string name="title_login">Увійти</string>
+    <string name="title_register">Зареєструватись</string>
+    <string name="title_email">Емейл</string>
+    <string name="title_password">Пароль</string>
+    <string name="title_confirm_password">Підтвердження паролю</string>
+    <string name="error_message_email_empty">Поле з поштою не має бути порожнім</string>
+    <string name="error_message_email_valid">Пошта має містити @....</string>
+    <string name="error_message_password_empty">Поле з паролем не має бути порожнім</string>
+    <string name="error_message_password_valid">Пароль повинен мати довжину від 8 символів</string>
+    <string name="error_message_password_match">Паролі мають співпадати</string>
+    <string name="title_navigate_to_register">Нажми сюди для реєстрації</string>
+    <string name="title_navigate_to_login">Повернутись до логіну</string>
 </resources>
