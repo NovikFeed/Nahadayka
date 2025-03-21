@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -33,11 +34,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.nahadayka.viewModel.NavigationViewModel
+import com.nahadayka.R
 
-sealed class ScreenItemOnBottomBar(val route: String, val title: String, val icon: ImageVector) {
-    object Reminders : ScreenItemOnBottomBar("reminders", "Нагадування", Icons.Default.Notifications)
-    object Calendar : ScreenItemOnBottomBar("calendar", "Календар", Icons.Default.DateRange)
-    object Settings : ScreenItemOnBottomBar("settings", "Налаштування", Icons.Default.Settings)
+sealed class ScreenItemOnBottomBar(val route: String, val title: Int, val icon: ImageVector) {
+    object Reminders : ScreenItemOnBottomBar("reminders",(R.string.title_reminder), Icons.Default.Notifications)
+    object Calendar : ScreenItemOnBottomBar("calendar", R.string.title_calendary, Icons.Default.DateRange)
+    object Settings : ScreenItemOnBottomBar("settings", (R.string.title_settings), Icons.Default.Settings)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -63,8 +65,8 @@ fun HomeScreen() {
             ) {
                 items.forEach { screen ->
                     NavigationBarItem(
-                        icon = { Icon(screen.icon, contentDescription = screen.title) },
-                        label = { Text(screen.title) },
+                        icon = { Icon(screen.icon, contentDescription = stringResource(screen.title)) },
+                        label = { Text(stringResource(screen.title)) },
                         selected = currentRoute == screen.route,
                         onClick = {
                             navController.navigate(screen.route) {

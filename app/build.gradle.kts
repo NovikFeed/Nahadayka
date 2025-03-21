@@ -61,6 +61,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.jetpack.navigation)
+    implementation(libs.androidx.appcompat)
 
     // Hilt
     implementation(libs.google.dagger.hilt)

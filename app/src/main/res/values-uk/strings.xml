@@ -12,4 +12,12 @@
     <string name="error_message_password_match">Паролі мають співпадати</string>
     <string name="title_navigate_to_register">Нажми сюди для реєстрації</string>
     <string name="title_navigate_to_login">Повернутись до логіну</string>
+    <string name="title_settings">Налаштування</string>
+    <string name="title_language">Мова</string>
+    <string name="title_logout">Вийти</string>
+    <string name="alert_title_choose_language">Оберіть мову</string>
+    <string name="alert_button_close">Закрити</string>
+    <string name="title_calendary">Календар</string>
+    <string name="title_reminder">Нагадування</string>
+
 </resources>

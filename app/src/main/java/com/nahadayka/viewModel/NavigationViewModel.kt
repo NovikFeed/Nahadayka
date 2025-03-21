@@ -1,10 +1,12 @@
 package com.nahadayka.viewModel
 
+import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nahadayka.model.SharedPreferencesRepository
+import com.nahadayka.model.repositories.LanguageRepository
 import com.nahadayka.model.repositories.NahadaykaRepository
 import com.nahadayka.view.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class NavigationViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferencesRepository,
-    private val repository: NahadaykaRepository
+    private val repository: NahadaykaRepository,
+    private val languageRepository: LanguageRepository
 ) : ViewModel() {
     private val _navigationState = MutableStateFlow(NavigationState())
     val navigationState = _navigationState.asStateFlow()
@@ -126,5 +129,10 @@ class NavigationViewModel @Inject constructor(
         } else {
             _navigationState.value = NavigationState()
         }
+    }
+    fun setLanguage(language : String): Context{
+        val context = languageRepository.setLanguage(language)
+        languageRepository.updateAppLocale()
+        return context
     }
 }
