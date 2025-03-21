@@ -60,7 +60,7 @@ fun MainContent() {
                 LoginScreen(navigationState, navigationViewModel)
             }
             composable(Screen.Home.route) {
-                HomeScreen()
+                HomeScreen(navigationViewModel)
             }
         }
         if (navigationState.isLoading) {

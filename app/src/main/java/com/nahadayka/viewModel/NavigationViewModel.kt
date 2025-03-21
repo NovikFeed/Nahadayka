@@ -29,47 +29,47 @@ class NavigationViewModel @Inject constructor(
         checkAuth()
     }
 
-    fun startAuth(email : String, password : String, confirmPassword : String = "", isLogin : Boolean){
+    fun startAuth(email: String, password: String, confirmPassword: String = "", isLogin: Boolean) {
         viewModelScope.launch {
-            if(isLogin){
+            if (isLogin) {
                 _navigationState.value = NavigationState(
                     isLoading = true,
                     viewMessage = false
                 )
                 val response = repository.loginUser(email, password)
-                if (response.isSuccess){
+                if (response.isSuccess) {
                     sharedPreferences.saveString(response.responseBody?.access, "access")
                     sharedPreferences.saveString(response.responseBody?.refresh, "refresh")
-                    sharedPreferences.saveString((System.currentTimeMillis()+60*60*1000).toString(), "expiration")
+                    sharedPreferences.saveString(
+                        (System.currentTimeMillis() + 60 * 60 * 1000).toString(),
+                        "expiration"
+                    )
                     _navigationState.value = NavigationState(
                         isLoading = false,
                         message = "ok",
                         screenRoute = Screen.Home.route
                     )
-                }
-                else{
+                } else {
                     _navigationState.value = NavigationState(
                         isLoading = false,
                         message = response.message,
                         viewMessage = true
                     )
                 }
-            }
-            else{
+            } else {
                 _navigationState.value = NavigationState(
                     isLoading = true,
                     viewMessage = false,
                     isLogin = false
                 )
                 val response = repository.registerUser(email, password, confirmPassword)
-                if(response.isSuccess){
+                if (response.isSuccess) {
                     _navigationState.value = NavigationState(
                         isLoading = false,
                         message = "ok",
                         screenRoute = Screen.Login.route
                     )
-                }
-                else{
+                } else {
                     _navigationState.value = NavigationState(
                         isLoading = false,
                         message = response.message,
@@ -89,14 +89,13 @@ class NavigationViewModel @Inject constructor(
         val expirationTime = sharedPreferences.getString("expiration")
         if (expirationTime != "") {
             if (expirationTime.toLong() > System.currentTimeMillis()) {
-                if(access != "" && refresh != ""){
+                if (access != "" && refresh != "") {
                     _navigationState.value = NavigationState(
                         isLoading = false,
                         message = "ok",
                         screenRoute = Screen.Home.route
                     )
-                }
-                else{
+                } else {
                     _navigationState.value = NavigationState(
                         isLoading = false,
                         message = "ok",
@@ -111,7 +110,10 @@ class NavigationViewModel @Inject constructor(
                     if (response.isSuccess) {
                         sharedPreferences.saveString(response.responseBody?.access, "access")
                         sharedPreferences.saveString(response.responseBody?.refresh, "refresh")
-                        sharedPreferences.saveString((System.currentTimeMillis()+60*60*1000).toString(), "expiration")
+                        sharedPreferences.saveString(
+                            (System.currentTimeMillis() + 60 * 60 * 1000).toString(),
+                            "expiration"
+                        )
                         _navigationState.value = NavigationState(
                             isLoading = false,
                             message = "ok",
@@ -130,9 +132,19 @@ class NavigationViewModel @Inject constructor(
             _navigationState.value = NavigationState()
         }
     }
-    fun setLanguage(language : String): Context{
+
+    fun setLanguage(language: String): Context {
         val context = languageRepository.setLanguage(language)
         languageRepository.updateAppLocale()
         return context
+    }
+
+    fun logout(){
+        sharedPreferences.removeString("access")
+        sharedPreferences.removeString("refresh")
+        sharedPreferences.removeString("expiration")
+        _navigationState.value = NavigationState()
+
+
     }
 }

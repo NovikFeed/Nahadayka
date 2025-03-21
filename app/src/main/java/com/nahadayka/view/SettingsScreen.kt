@@ -59,7 +59,9 @@ fun SettingsScreen(
                 modifier = Modifier.weight(1f),
                 icon = Icons.Default.ExitToApp,
                 text = stringResource(R.string.title_logout),
-                onClick = {}
+                onClick = {
+                    viewModel.logout()
+                }
             )
         }
     }

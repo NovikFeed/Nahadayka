@@ -44,9 +44,8 @@ sealed class ScreenItemOnBottomBar(val route: String, val title: Int, val icon: 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(viewModel : NavigationViewModel) {
     val navController = rememberNavController()
-    val viewModel = hiltViewModel<NavigationViewModel>()
     val items = listOf(
         ScreenItemOnBottomBar.Reminders,
         ScreenItemOnBottomBar.Calendar,
